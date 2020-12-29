@@ -1,23 +1,62 @@
 #import library
 from tkinter import *
+from PIL import ImageTk,Image #PIL -> Pillow
 import random
 
 #initialize window
 root = Tk()
 root.geometry('400x400')
 root.resizable(0,0)
-root.title('DataFlair-Rock,Paper,Scissors')
+root.title('Rock,Paper,Scissors-Game')
 root.config(bg ='seashell3')
+
+same=True
+n= 0.9
+
+# Adding a background image
+background_image = Image.open("sps.jpg")
+[imageSizeWidth, imageSizeHeight] = background_image.size
+
+newImageSizeWidth = int(imageSizeWidth * n)
+if same:
+    newImageSizeHeight = int(imageSizeHeight * n)
+else:
+    newImageSizeHeight = int(imageSizeHeight / n)
+
+background_image = background_image.resize((newImageSizeWidth, newImageSizeHeight), Image.ANTIALIAS)
+img = ImageTk.PhotoImage(background_image)
+Canvas1 = Canvas(root)
+Canvas1.create_image(200, 200, image=img)
+Canvas1.config(bg="white", width=newImageSizeWidth, height=newImageSizeHeight)
+Canvas1.pack(expand=True, fill=BOTH)
 
 
 #heading
-Label(root, text = 'Rock, Paper ,Scissors' , font='arial 20 bold', bg = 'seashell2').pack()
+Label(root, text = 'Rock, Paper ,Scissors' , font='arial 20 bold', bg = 'white').pack()
 
 
 ##user choice
 user_take = StringVar()
-Label(root, text = 'choose any one: rock, paper ,scissors' , font='arial 15 bold', bg = 'seashell2').place(x = 20,y=70)
-Entry(root, font = 'arial 15', textvariable = user_take , bg = 'antiquewhite2').place(x=90 , y = 130)
+
+#functions runned by choice buttons
+def Rock():
+    user_take.set("rock")
+
+def Scissor():
+    user_take.set("scissors")
+
+def Paper():
+    user_take.set("paper")
+
+
+Label(root, text = 'Choose any one: rock, paper, scissors' , font='arial 15 bold', bg = 'white').place(x = 20,y=70)
+#Buttons to select option
+Button(root, font = 'arial 13 bold', text = 'ROCK'  ,padx =5, bg ='Cornflowerblue' ,fg = 'white',command = Rock ).place(x=70,y=110)
+Button(root, font = 'arial 13 bold', text = 'PAPER'  ,padx =5, bg ='Cornflowerblue',fg = 'white' ,command = Paper ).place(x=160,y=110)
+Button(root, font = 'arial 13 bold', text = 'SCISSOR'  ,padx =5, bg ='Cornflowerblue', fg = 'white' ,command = Scissor ).place(x=255,y=110)
+
+#user input box
+Entry(root, font = 'arial 15', textvariable = user_take , bg = 'antiquewhite2').place(x=90 , y = 150)
 
 
 
@@ -68,12 +107,12 @@ def Exit():
 
 
 ###### button
-Entry(root, font = 'arial 10 bold', textvariable = Result, bg ='antiquewhite2',width = 50,).place(x=25, y = 250)
+Entry(root, font='arial 10 bold', textvariable=Result, bg='lightgray', width=50).place(x=25, y=250)
 
-Button(root, font = 'arial 13 bold', text = 'PLAY'  ,padx =5,bg ='seashell4' ,command = play).place(x=150,y=190)
+Button(root, font='arial 13 bold', text='PLAY > ', padx=5, bg='cyan', command=play).place(x=150, y=190)
 
-Button(root, font = 'arial 13 bold', text = 'RESET'  ,padx =5,bg ='seashell4' ,command = Reset).place(x=70,y=310)
+Button(root, font='arial 13 bold', text='RESET', padx=5, bg='lime', command=Reset).place(x=70, y=310)
 
-Button(root, font = 'arial 13 bold', text = 'EXIT'  ,padx =5,bg ='seashell4' ,command = Exit).place(x=230,y=310)
+Button(root, font='arial 13 bold', text='EXIT', padx=5, bg='red', fg='white', command=Exit).place(x=230, y=310)
 
 root.mainloop()
