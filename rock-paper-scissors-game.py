@@ -1,17 +1,17 @@
-#import library
+# import library
 from tkinter import *
-from PIL import ImageTk,Image #PIL -> Pillow
+from PIL import ImageTk, Image  # PIL -> Pillow
 import random
 
-#initialize window
+# initialize window
 root = Tk()
 root.geometry('400x400')
-root.resizable(0,0)
+root.resizable(0, 0)
 root.title('Rock,Paper,Scissors-Game')
-root.config(bg ='seashell3')
+root.config(bg='seashell3')
 
-same=True
-n= 0.9
+same = True
+n = 0.9
 
 # Adding a background image
 background_image = Image.open("sps.jpg")
@@ -31,40 +31,42 @@ Canvas1.config(bg="white", width=newImageSizeWidth, height=newImageSizeHeight)
 Canvas1.pack(expand=True, fill=BOTH)
 
 
-#heading
-Label(root, text = 'Rock, Paper ,Scissors' , font='arial 20 bold', bg = 'white').pack()
+# heading
+Label(root, text='Rock, Paper ,Scissors', font='arial 20 bold', bg='white').pack()
 
 
-##user choice
+# user choice
 user_take = StringVar()
 
-#functions runned by choice buttons
-def Rock():
+# functions run by choice buttons
+def rock():
     user_take.set("rock")
 
-def Scissor():
+def scissor():
     user_take.set("scissors")
 
-def Paper():
+def paper():
     user_take.set("paper")
 
 
-Label(root, text = 'Choose any one: rock, paper, scissors' , font='arial 15 bold', bg = 'white').place(x = 20,y=70)
-#Buttons to select option
-Button(root, font = 'arial 13 bold', text = 'ROCK'  ,padx =5, bg ='Cornflowerblue' ,fg = 'white',command = Rock ).place(x=70,y=110)
-Button(root, font = 'arial 13 bold', text = 'PAPER'  ,padx =5, bg ='Cornflowerblue',fg = 'white' ,command = Paper ).place(x=160,y=110)
-Button(root, font = 'arial 13 bold', text = 'SCISSOR'  ,padx =5, bg ='Cornflowerblue', fg = 'white' ,command = Scissor ).place(x=255,y=110)
+Label(root, text='Choose any one: rock, paper, scissors', font='arial 15 bold', bg='#ffffff'  ).place(x=20, y=70)
 
-#user input box
-Entry(root, font = 'arial 15', textvariable = user_take , bg = 'antiquewhite2').place(x=90 , y = 150)
+# Buttons to select option
+Button(root, font='arial 13 bold', text='ROCK', padx=5, bg='Cornflowerblue', fg='white', command=rock).place(x=70, y=110)
+Button(root, font='arial 13 bold', text='PAPER', padx=5, bg='Cornflowerblue', fg='white', command=paper).place(x=160, y=110)
+Button(root, font='arial 13 bold', text='SCISSOR', padx=5, bg='Cornflowerblue', fg='white', command=scissor).place(x=255, y=110)
+
+# user input box
+Entry(root, font='arial 15', textvariable=user_take, bg='antiquewhite2').place(x=90, y=150)
 
 
 
-#computer choice
+# computer choice
+
 comp_pick = random.randint(1,3)
 if comp_pick == 1:
     comp_pick = 'rock'
-elif comp_pick ==2:
+elif comp_pick == 2:
     comp_pick = 'paper'
 else:
     comp_pick = 'scissors'
@@ -72,7 +74,7 @@ else:
 
 
 
-##function to play
+# function to play
 Result = StringVar()
 
 def play():
@@ -96,23 +98,24 @@ def play():
     
         
     
-##fun to reset
-def Reset():
-    Result.set("") 
+# fun to reset
+def reset():
+    Result.set("")
     user_take.set("")
 
-##fun to exit
-def Exit():
+
+# fun to exit
+def exit():
     root.destroy()
 
 
-###### button
+# button
 Entry(root, font='arial 10 bold', textvariable=Result, bg='lightgray', width=50).place(x=25, y=250)
 
 Button(root, font='arial 13 bold', text='PLAY > ', padx=5, bg='cyan', command=play).place(x=150, y=190)
 
-Button(root, font='arial 13 bold', text='RESET', padx=5, bg='lime', command=Reset).place(x=70, y=310)
+Button(root, font='arial 13 bold', text='RESET', padx=5, bg='lime', command=reset).place(x=70, y=310)
 
-Button(root, font='arial 13 bold', text='EXIT', padx=5, bg='red', fg='white', command=Exit).place(x=230, y=310)
+Button(root, font='arial 13 bold', text='EXIT', padx=5, bg='red', fg='white', command=exit).place(x=230, y=310)
 
 root.mainloop()
