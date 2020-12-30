@@ -1,5 +1,5 @@
 <?php
 
-include_once("rock-paper-scissors-game.py");
+include_once("index.py");
 
 ?>
